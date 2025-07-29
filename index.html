@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Finder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🎓 K L University Faculty Finder</h1>
+    <p>Find any faculty or department instantly</p>
+  </header>
+
+  <main>
+    <!-- 🔍 Universal Search Bar -->
+    <input type="text" id="universalSearch" placeholder="🔍 Search Faculty or Department..."
+           style="padding:10px; width:90%; max-width:400px; margin:20px auto; display:block; border-radius:8px; border:1px solid #ccc;">
+
+    <!-- Department List -->
+    <section id="department-list" class="faculty-container"></section>
+
+    <!-- Faculty Section (Hidden Initially) -->
+    <section id="faculty-section" class="faculty-container hidden"></section>
+
+    <!-- Faculty Details -->
+    <div id="details" class="hidden"></div>
+
+    <p style="text-align: center; font-size: 14px; margin-top: 40px;">
+      Developed by <strong>Siddartha Reddy Gade</strong> | Instagram:
+      <a href="https://instagram.com/siddarthareddi" target="_blank">@siddarthareddi</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 K L University. All rights reserved.</p>
+  </footer>
+
+  <script src="first.js"></script>
+</body>
+</html>
