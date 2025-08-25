@@ -15,35 +15,116 @@ const departments = [
   "Physics",
   "Business School",
   "Computer Science and Applications",
-  "Law"
+  "Law",
+  "SAC-Student Activity Center"
+  
 ];
 
 // ✅ Faculty Data
+
+
+
+// Computer Science & Engineering
 const facultyData = {
+// Agriculture
+  "Agriculture": [
+    { name: "Mr.BODDEPALLI RAMBABU", dept: "Agriculture", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
+    ],
+
+//Architecture
+ "Architecture": [
+    { name: "Mr.BODDEPALLI RAMBABU", dept: "Architecture", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
+    ],
+
+
+//Arts
+ "Arts": [
+    { name: "Mr.BODDEPALLI RAMBABU", dept: "Arts", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
+    ],
+
+
+//Bio-Technology
+ "Bio-Technology": [
+    { name: "Mr.BODDEPALLI RAMBABU", dept: "Bio-Technology", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
+    ],
+
+
+//Civil Engineering
+ "Civil Engineering": [
+    { name: "Mr.BODDEPALLI RAMBABU", dept: "Civil Engineering", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
+    ],
+
+
+//Chemistry
+"Chemistry": [
+    { name: "Mr.BODDEPALLI RAMBABU", dept: "Chemistry", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
+    ],
+
+
+// Computer Science & Engineering
   "Computer Science & Engineering": [
     { name: "Dr. Pavan Kumar", dept: "Computer Science", cabinet: "Room 305, CS Building", img: "static/images/pavankumar.jpg" },
     { name: "Dr. Example", dept: "Computer Science", cabinet: "C-301", img: "static/images/6040.jpg" },
     { name: "Prof. Aditya Verma", dept: "CSE - AI & ML", cabinet: "A-115", img: "static/images/profile.jpg" }
   ],
-  "Civil Engineering": [
-    { name: "Prof. Kiran Rao", dept: "Civil Engineering", cabinet: "C-112", img: "static/images/profile.jpg" }
+
+//Electronics & Communication Engineering
+  "Electronics & Communication Engineering": [
+    { name: "Prof. Kiran Rao", dept: "Electronics & Communication Engineering", cabinet: "C-112", img: "static/images/profile.jpg" }
   ],
+
+ //Mathematics
+  "Mathematics": [
+    { name: "Prof. Ravi Kumar", dept: "Mathematics", cabinet: "M-102", img: "static/images/profile.jpg" }
+  ],
+
+
+  //Mechanical Engineering
   "Mechanical Engineering": [
-    { name: "Prof. Ravi Kumar", dept: "Mechanical Engineering", cabinet: "M-102", img: "static/images/profile.jpg" }
+    { name: "Dr. Sneha Patil", dept: "Mechanical Engineering", cabinet: "P-210", img: "static/images/profile.jpg" }
   ],
+
+
+//Pharmacy
   "Pharmacy": [
-    { name: "Dr. Sneha Patil", dept: "Pharmacy", cabinet: "P-210", img: "static/images/profile.jpg" }
+    { name: "Dr. Vineeth K", dept: "Pharmacy", cabinet: "SC-105", img: "static/images/profile.jpg" }
   ],
+
+
+//Physics
   "Physics": [
-    { name: "Dr. Vineeth K", dept: "Physics", cabinet: "SC-105", img: "static/images/profile.jpg" }
+    { name: "Dr. Meena Iyer", dept: "Physics", cabinet: "B-303", img: "static/images/profile.jpg" }
   ],
+
+
+//Business School
   "Business School": [
-    { name: "Dr. Meena Iyer", dept: "MBA", cabinet: "B-303", img: "static/images/profile.jpg" }
+    { name: "Prof. Lakshmi Devi", dept: "Business School", cabinet: "H-303", img: "static/images/profile.jpg" }
   ],
-  "English": [
-    { name: "Prof. Lakshmi Devi", dept: "English", cabinet: "H-303", img: "static/images/profile.jpg" }
-  ]
+
+
+
+ //Computer Science and Applications
+"Computer Science and Applications": [
+    { name: "Prof. Lakshmi Devi", dept: "Computer Science and Applications", cabinet: "H-303", img: "static/images/profile.jpg" }
+  ],
+
+
+
+//Law
+"Law": [
+    { name: "Prof. Lakshmi Devi", dept: "Law", cabinet: "H-303", img: "static/images/profile.jpg" }
+  ],
+
+
+
+//SAC-Student Activity Center
+"SAC-Student Activity Center": [
+    { name: "Prof.Sai vijay ", dept: "SAC-Student Activity Center", cabinet: "R-002", img: "static/images/saivijay.jpeg" }
+  ],
 };
+
+
 
 // ✅ Render Departments on Home Page
 const deptList = document.getElementById("department-list");
