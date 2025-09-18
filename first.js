@@ -17,114 +17,61 @@ const departments = [
   "Computer Science and Applications",
   "Law",
   "SAC-Student Activity Center"
-  
 ];
 
 // ✅ Faculty Data
-
-
-
-// Computer Science & Engineering
 const facultyData = {
-// Agriculture
   "Agriculture": [
     { name: "Mr.BODDEPALLI RAMBABU", dept: "Agriculture", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
-    ],
-
-//Architecture
- "Architecture": [
+  ],
+  "Architecture": [
     { name: "Mr.BODDEPALLI RAMBABU", dept: "Architecture", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
-    ],
-
-
-//Arts
- "Arts": [
+  ],
+  "Arts": [
     { name: "Mr.BODDEPALLI RAMBABU", dept: "Arts", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
-    ],
-
-
-//Bio-Technology
- "Bio-Technology": [
+  ],
+  "Bio-Technology": [
     { name: "Mr.BODDEPALLI RAMBABU", dept: "Bio-Technology", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
-    ],
-
-
-//Civil Engineering
- "Civil Engineering": [
+  ],
+  "Civil Engineering": [
     { name: "Mr.BODDEPALLI RAMBABU", dept: "Civil Engineering", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
-    ],
-
-
-//Chemistry
-"Chemistry": [
+  ],
+  "Chemistry": [
     { name: "Mr.BODDEPALLI RAMBABU", dept: "Chemistry", cabinet: "Room 305, CS Building", img: "static/images/Mr.BODDEPALLIRAMBABU.jpg" },
-    ],
-
-
-// Computer Science & Engineering
+  ],
   "Computer Science & Engineering": [
     { name: "Dr. Pavan Kumar", dept: "Computer Science", cabinet: "Room 305, CS Building", img: "static/images/pavankumar.jpg" },
     { name: "Dr. Example", dept: "Computer Science", cabinet: "C-301", img: "static/images/6040.jpg" },
     { name: "Prof. Aditya Verma", dept: "CSE - AI & ML", cabinet: "A-115", img: "static/images/profile.jpg" }
   ],
-
-//Electronics & Communication Engineering
   "Electronics & Communication Engineering": [
     { name: "Prof. Kiran Rao", dept: "Electronics & Communication Engineering", cabinet: "C-112", img: "static/images/profile.jpg" }
   ],
-
- //Mathematics
   "Mathematics": [
     { name: "Prof. Ravi Kumar", dept: "Mathematics", cabinet: "M-102", img: "static/images/profile.jpg" }
   ],
-
-
-  //Mechanical Engineering
   "Mechanical Engineering": [
     { name: "Dr. Sneha Patil", dept: "Mechanical Engineering", cabinet: "P-210", img: "static/images/profile.jpg" }
   ],
-
-
-//Pharmacy
   "Pharmacy": [
     { name: "Dr. Vineeth K", dept: "Pharmacy", cabinet: "SC-105", img: "static/images/profile.jpg" }
   ],
-
-
-//Physics
   "Physics": [
     { name: "Dr. Meena Iyer", dept: "Physics", cabinet: "B-303", img: "static/images/profile.jpg" }
   ],
-
-
-//Business School
   "Business School": [
     { name: "Prof. Lakshmi Devi", dept: "Business School", cabinet: "H-303", img: "static/images/profile.jpg" }
   ],
-
-
-
- //Computer Science and Applications
-"Computer Science and Applications": [
+  "Computer Science and Applications": [
     { name: "Prof. Lakshmi Devi", dept: "Computer Science and Applications", cabinet: "H-303", img: "static/images/profile.jpg" }
   ],
-
-
-
-//Law
-"Law": [
+  "Law": [
     { name: "Prof. Lakshmi Devi", dept: "Law", cabinet: "H-303", img: "static/images/profile.jpg" }
   ],
-
-
-
-//SAC-Student Activity Center
-"SAC-Student Activity Center": [
-    { name: "Prof.Sai vijay ", dept: "SAC-Student Activity Center", cabinet: "R-002", img: "static/images/saivijay.jpeg" }
+  "SAC-Student Activity Center": [
+    { name: "Prof.Sai vijay", dept: "SAC-Student Activity Center", cabinet: "R-002", img: "static/images/saivijay.jpeg" }
   ],
 };
-
-
 
 // ✅ Render Departments on Home Page
 const deptList = document.getElementById("department-list");
@@ -141,50 +88,66 @@ departments.forEach(dept => {
   deptList.appendChild(div);
 });
 
-// ✅ Universal Search (Faculty or Department)
-document.getElementById("universalSearch").addEventListener("keyup", function (e) {
-  if (e.key === "Enter") {
-    const query = this.value.toLowerCase().trim();
-    if (query === "") return;
+// ✅ Universal Search (Live, Case-Insensitive, Multiple Results + Highlight)
+const searchInput = document.getElementById("universalSearch");
+const facultySection = document.getElementById("faculty-section");
 
-    // 1️⃣ Search Department
-    const matchedDept = departments.find(d => d.toLowerCase().includes(query));
-    if (matchedDept) {
-      loadFaculty(matchedDept);
-      return;
-    }
+searchInput.addEventListener("input", function () {
+  const query = this.value.toLowerCase().trim();
 
-    // 2️⃣ Search Faculty across all departments
-    let foundFaculty = null;
-    let foundDept = null;
-
-    for (let dept in facultyData) {
-      facultyData[dept].forEach(faculty => {
-        if (faculty.name.toLowerCase().includes(query)) {
-          foundFaculty = faculty.name;
-          foundDept = dept;
-        }
-      });
-      if (foundFaculty) break;
-    }
-
-    // 3️⃣ If Faculty Found → Load Dept and Highlight
-    if (foundFaculty && foundDept) {
-      loadFaculty(foundDept);
-      setTimeout(() => {
-        const cards = document.querySelectorAll("#faculty-section .faculty-card");
-        cards.forEach(card => {
-          if (card.querySelector("h2").innerText === foundFaculty) {
-            card.style.border = "2px solid red";
-            card.scrollIntoView({ behavior: "smooth", block: "center" });
-            setTimeout(() => card.style.border = "", 3000);
-          }
-        });
-      }, 300);
-    } else {
-      alert("❌ No Faculty or Department Found!");
-    }
+  if (query === "") {
+    facultySection.innerHTML = "";
+    facultySection.classList.add("hidden");
+    document.getElementById("department-list").classList.remove("hidden");
+    return;
   }
+
+  // 🔍 Check if query matches department
+  const matchedDept = departments.find(d => d.toLowerCase().includes(query));
+  if (matchedDept) {
+    loadFaculty(matchedDept);
+    return;
+  }
+
+  // 🔍 Search faculty across all departments
+  let results = [];
+  for (let dept in facultyData) {
+    facultyData[dept].forEach(faculty => {
+      if (faculty.name.toLowerCase().includes(query)) {
+        results.push({ ...faculty, dept });
+      }
+    });
+  }
+
+  facultySection.innerHTML = "";
+  facultySection.classList.remove("hidden");
+  document.getElementById("department-list").classList.add("hidden");
+
+  if (results.length === 0) {
+    facultySection.innerHTML = `<p style="text-align:center;">❌ No results found</p>`;
+    return;
+  }
+
+  // Render results with highlight
+  results.forEach(faculty => {
+    const highlightedName = faculty.name.replace(
+      new RegExp(query, "gi"),
+      match => `<mark style="background:yellow; border-radius:4px;">${match}</mark>`
+    );
+
+    const card = document.createElement("div");
+    card.className = "faculty-card";
+    card.innerHTML = `
+      <img src="${faculty.img}" alt="Faculty Photo">
+      <div class="info">
+        <h2>${highlightedName}</h2>
+        <p><strong>Department:</strong> ${faculty.dept}</p>
+        <p><strong>Cabinet:</strong> ${faculty.cabinet}</p>
+        <button onclick="showDetails('${faculty.name}')">More Info</button>
+      </div>
+    `;
+    facultySection.appendChild(card);
+  });
 });
 
 // ✅ Load Faculty for Selected Department
@@ -222,6 +185,7 @@ function showDepartments() {
   document.getElementById("faculty-section").classList.add("hidden");
   document.getElementById("department-list").classList.remove("hidden");
   document.getElementById("details").classList.add("hidden");
+  searchInput.value = "";
 }
 
 // ✅ Show Faculty Details

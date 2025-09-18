@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Data Entry</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f8f9fa;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label { font-weight: bold; }
+
+    input, select, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .preview img {
+      max-width: 100px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Add / Update Faculty Data</h2>
+
+    <form id="dataForm">
+      <label>Name:</label>
+      <input type="text" id="name" required>
+
+      <label>Department:</label>
+      <select id="department" required>
+        <option value="">-- Select Department --</option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Architecture">Architecture</option>
+        <option value="Arts">Arts</option>
+        <option value="Bio-Technology">Bio-Technology</option>
+        <option value="Civil Engineering">Civil Engineering</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+        <option value="Electronics & Communication Engineering">Electronics & Communication Engineering</option>
+        <option value="Electrical & Electronics Engineering">Electrical & Electronics Engineering</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Mechanical Engineering">Mechanical Engineering</option>
+        <option value="Pharmacy">Pharmacy</option>
+        <option value="Physics">Physics</option>
+        <option value="Business School">Business School</option>
+        <option value="Computer Science and Applications">Computer Science and Applications</option>
+        <option value="Law">Law</option>
+        <option value="SAC-Student Activity Center">SAC-Student Activity Center</option>
+      </select>
+
+      <label>Cabin Number:</label>
+      <input type="text" id="cabin" required>
+
+      <label>Block:</label>
+      <select id="block" required>
+        <option value="">-- Select Block --</option>
+        <option value="C-Block">C-Block</option>
+        <option value="R and D-Block">R and D-Block</option>
+        <option value="M-Block">M-Block</option>
+        <option value="F-Block">F-Block</option>
+        <option value="E-Block">E-Block</option>
+        <option value="SK-Block">SK-Block</option>
+        <option value="S-Block">S-Block</option>
+      </select>
+
+      <label>Photo:</label>
+      <input type="file" id="photo" accept="image/*" required>
+      <div class="preview" id="preview"></div>
+
+      <button type="submit">Save Data</button>
+    </form>
+  </div>
+
+  <script>
+    let facultyData = JSON.parse(localStorage.getItem("facultyData")) || [];
+
+    const photoInput = document.getElementById("photo");
+    const previewDiv = document.getElementById("preview");
+    let photoBase64 = "";
+
+    photoInput.addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          photoBase64 = e.target.result;
+          previewDiv.innerHTML = `<img src="${photoBase64}" alt="Preview">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById("dataForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const newEntry = {
+        name: document.getElementById("name").value,
+        department: document.getElementById("department").value,
+        cabin: document.getElementById("cabin").value,
+        block: document.getElementById("block").value,
+        photo: photoBase64
+      };
+
+      facultyData.push(newEntry);
+      localStorage.setItem("facultyData", JSON.stringify(facultyData));
+
+      alert("✅ Data saved successfully!");
+      this.reset();
+      previewDiv.innerHTML = "";
+    });
+  </script>
+</body>
+</html>
